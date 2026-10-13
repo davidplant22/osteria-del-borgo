@@ -112,6 +112,18 @@ section.recensioni{background:var(--verde);color:#F6EFDF}
 
 footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px;font-size:.9rem}
 
+/* ====== Azioni di contatto (demo) ====== */
+.azioni-hero{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.hero .btn.wa-hero{background:#F6EFDF;color:#162B20;font-size:1rem;padding:15px 28px;box-shadow:none}
+.hero .btn.wa-hero:hover{box-shadow:none}
+.btn.btn-mappa{margin-top:18px}
+.contatti dd a{font-weight:600;text-decoration:underline;text-underline-offset:3px}
+[data-azione].demo{opacity:.65;cursor:not-allowed}
+[data-azione].demo::after{content:" · demo";font-weight:400;font-size:.85em}
+.barra-contatti{display:none}
+.avviso-demo{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);width:max-content;max-width:min(92vw,420px);background:var(--crema);color:var(--testo);border:1px solid var(--terracotta);border-radius:12px;padding:12px 16px;font-size:.92rem;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:20;opacity:0;visibility:hidden}
+.avviso-demo.visibile{opacity:1;visibility:visible}
+
 @media (max-width:760px){
   .hero .wrap,.storia,.contatti{grid-template-columns:1fr}
   .hero{padding:44px 0 56px}
@@ -128,6 +140,12 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
   .js nav ul{flex-direction:column;flex-wrap:nowrap;gap:0;padding:6px 0 10px}
   .js nav a{display:block;padding:14px 22px;font-size:1.05rem;border-bottom:0}
   .js nav a:hover{background:rgba(246,239,223,.1)}
+  /* Barra fissa in basso con Chiama e WhatsApp */
+  .barra-contatti{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:9;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:var(--verde);box-shadow:0 -6px 18px rgba(0,0,0,.25)}
+  .barra-btn{flex:1;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;font-weight:600;text-decoration:none;background:var(--terracotta);color:#fff}
+  .barra-btn.wa{background:#F6EFDF;color:#162B20}
+  footer{padding-bottom:calc(26px + 68px + env(safe-area-inset-bottom,0px))}
+  .avviso-demo{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   section{padding:52px 0}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
@@ -159,7 +177,11 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
       <div>
         <h1>Cucina di casa, come una volta</h1>
         <p>Paste fatte a mano, ricette di famiglia e ingredienti di stagione, in una sala piccola e accogliente.</p>
-        <a class="btn" href="#menu">Scopri il menu</a>
+        <div class="azioni-hero">
+          <a class="btn" href="#menu">Scopri il menu</a>
+          <!-- WhatsApp: segnaposto dimostrativo, disattivato finché MODALITA_DEMO è true (vedi lo script in fondo) -->
+          <a class="btn wa-hero demo" data-azione aria-disabled="true" href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20avere%20informazioni%20sull%27Osteria%20del%20Borgo." target="_blank" rel="noopener">Scrivici su WhatsApp</a>
+        </div>
       </div>
       <!-- Illustrazione: piatto di pasta -->
       <svg viewBox="0 0 300 300" role="img" aria-label="Illustrazione di un piatto di pasta al pomodoro">
@@ -259,8 +281,10 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
         <div>
           <dl>
             <dt>Indirizzo (fittizio)</dt><dd>Via del Borgo 12, 00000 Borgo Antico</dd>
-            <dt>Telefono (fittizio)</dt><dd>+39 000 000 0000</dd>
+            <dt>Telefono (fittizio)</dt><dd><a class="demo" data-azione aria-disabled="true" href="tel:+390000000000">+39 000 000 0000</a></dd>
           </dl>
+          <!-- Indicazioni: l'indirizzo è fittizio, quindi il link è un segnaposto disattivato -->
+          <a class="btn btn-mappa demo" data-azione aria-disabled="true" href="https://www.google.com/maps/dir/?api=1&destination=INDIRIZZO-REALE-QUI" target="_blank" rel="noopener">Indicazioni</a>
           <h3 style="margin-top:28px;color:var(--verde)">Orari</h3>
           <table>
             <tr><td>Martedì – Venerdì</td><td>12:00–15:00 · 19:00–23:00</td></tr>
@@ -272,7 +296,7 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
           <h3>Vuoi sapere qualcosa?</h3>
           <p>Scrivici su WhatsApp per chiedere informazioni su menu, allergeni o eventi. Questo pulsante apre solo una chat: il sito non gestisce prenotazioni.</p>
           <!-- Sostituisci 390000000000 con un numero vero (prefisso 39 + numero, senza spazi né +) -->
-          <a class="btn wa" href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20avere%20informazioni%20sull%27Osteria%20del%20Borgo." target="_blank" rel="noopener">Chiedi informazioni su WhatsApp</a>
+          <a class="btn wa demo" data-azione aria-disabled="true" href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20avere%20informazioni%20sull%27Osteria%20del%20Borgo." target="_blank" rel="noopener">Chiedi informazioni su WhatsApp</a>
         </div>
       </div>
     </div>
@@ -280,6 +304,13 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
 </main>
 
 <footer>© Osteria del Borgo · Sito dimostrativo con dati inventati · Nessuna prenotazione o pagamento online</footer>
+
+<!-- Barra fissa per smartphone (visibile solo sotto i 760 px). Numero e link sono segnaposto dimostrativi. -->
+<div class="barra-contatti" role="group" aria-label="Contatti rapidi">
+  <a class="barra-btn demo" data-azione aria-disabled="true" href="tel:+390000000000">Chiama</a>
+  <a class="barra-btn wa demo" data-azione aria-disabled="true" href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20avere%20informazioni%20sull%27Osteria%20del%20Borgo." target="_blank" rel="noopener">WhatsApp</a>
+</div>
+<div class="avviso-demo" id="avviso-demo" role="status" aria-live="polite"></div>
 <script>
 /* Menu hamburger: apre/chiude, si chiude con la scelta di una voce, con Esc o toccando fuori */
 (function(){
@@ -300,6 +331,29 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
   });
   var mq=window.matchMedia('(max-width:760px)');
   if(mq.addEventListener){mq.addEventListener('change',function(){imposta(false);});}
+})();
+</script>
+<script>
+/* Azioni di contatto: finché MODALITA_DEMO è true, chiamata, WhatsApp e indicazioni restano disattivate */
+var MODALITA_DEMO = true; /* metti false solo dopo aver inserito numero, link WhatsApp e indirizzo veri */
+(function(){
+  var azioni=document.querySelectorAll('[data-azione]');
+  var avviso=document.getElementById('avviso-demo');
+  var timer;
+  if(!MODALITA_DEMO){
+    azioni.forEach(function(a){a.removeAttribute('aria-disabled');a.classList.remove('demo');});
+    return;
+  }
+  azioni.forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      if(!avviso)return;
+      avviso.textContent='Azione disattivata: questo è un sito dimostrativo, senza dati reali.';
+      avviso.classList.add('visibile');
+      clearTimeout(timer);
+      timer=setTimeout(function(){avviso.classList.remove('visibile');avviso.textContent='';},4000);
+    });
+  });
 })();
 </script>
 </body>
