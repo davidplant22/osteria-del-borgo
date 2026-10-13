@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Osteria del Borgo | Ristorante Italiano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ====== 1) COLORI: cambia qui i colori di tutto il sito ====== */
+:root{
+  --crema:#E8F0E8;        /* sfondo */
+  --crema-scuro:#EBE0C8;  /* sezioni alternate */
+  --verde:#162B20;        /* verde bosco scuro */
+  --terracotta:#B5532F;   /* dettagli e pulsanti */
+  --testo:#2A2A25;
+  --font-titoli:'Fraunces',Georgia,serif;
+  --font-testo:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--crema:#1F2620;--crema-scuro:#27312A;--testo:#EDE6D3;--verde:#2F5240;--terracotta:#D0673F}
+}
+:root[data-theme="dark"]{--crema:#1F2620;--crema-scuro:#27312A;--testo:#EDE6D3;--verde:#2F5240;--terracotta:#D0673F}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:#F2F2F2;color:var(--testo);font-family:var(--font-testo);line-height:1.65;font-size:18px}h1,h2,h3{font-family:var(--font-titoli);font-weight:600;line-height:1.15;margin:0 0 .5em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+.wrap{max-width:1050px;margin:0 auto;padding:0 22px}
+
+/* Avviso demo */
+.demo{background:var(--terracotta);color:#fff;text-align:center;font-size:14px;padding:7px 14px}
+
+/* ====== Testata ====== */
+header{position:sticky;top:0;z-index:10;background:var(--verde);color:#F6EFDF}
+.nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;padding:12px 22px;max-width:1050px;margin:0 auto}
+.logo{font-family:var(--font-titoli);font-size:1.4rem;text-decoration:none;font-weight:600}
+nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0}
+nav a{text-decoration:none;font-weight:500;font-size:.95rem;padding:4px 0;border-bottom:2px solid transparent}
+nav a:hover{border-color:var(--terracotta)}
+
+/* ====== Sezione iniziale ====== */
+.hero{background:var(--verde);color:#F6EFDF;padding:64px 0 80px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-.01em}
+.hero p{font-size:1.15rem;max-width:34ch;opacity:.92;margin:0 0 28px}
+.btn{display:inline-block;background:var(--terracotta);color:#fff;text-decoration:none;font-weight:600;padding:20px 36px;border-radius:8px;border:0;cursor:pointer;font-size:1rem;transition:transform .3s}
+.btn:hover{transform:translateY(-6px);box-shadow:0 8px 20px rgba(0,0,0,0.2)}
+.btn.wa{background:#1f7a4d}
+.hero .btn{font-size:1.15rem;padding:17px 38px;box-shadow:0 0 0 4px rgba(246,239,223,.35),0 10px 24px rgba(0,0,0,.35)}
+.hero .btn:hover{box-shadow:0 0 0 6px rgba(246,239,223,.5),0 12px 28px rgba(0,0,0,.4)}
+.hero svg{width:100%;max-width:380px;justify-self:center;display:block}
+
+/* ====== Sezioni ====== */
+section{padding:72px 0}
+section.alt{background:var(--crema-scuro)}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);color:var(--verde)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h2{color:#BFD8C4}}
+:root[data-theme="dark"] h2{color:#BFD8C4}
+.intro{max-width:56ch;margin-bottom:36px}
+.piatti{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px}
+.piatto{background:var(--crema);border-radius:18px;overflow:hidden;border:1px solid rgba(37,64,47,.15)}
+.piatto svg{width:100%;height:170px;display:block}
+.piatto div{padding:18px 20px 22px}
+.piatto h3{font-size:1.25rem;margin-bottom:.3em}
+.piatto p{margin:0 0 10px;font-size:.96rem}
+.prezzo{color:var(--terracotta);font-weight:600}
+.nota{font-size:.88rem;opacity:.75;margin-top:22px}
+
+.storia{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.storia svg{width:100%;max-width:360px;justify-self:center}
+.storia blockquote{margin:22px 0 0;padding-left:18px;border-left:4px solid var(--terracotta);font-family:var(--font-titoli);font-size:1.15rem}
+
+.contatti{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.contatti dl{margin:0}
+.contatti dt{font-weight:600;color:var(--terracotta);margin-top:14px}
+.contatti dd{margin:0}
+table{border-collapse:collapse;width:100%}
+td{padding:8px 0;border-bottom:1px solid rgba(37,64,47,.2)}
+td:last-child{text-align:right}
+.box{background:var(--verde);color:#F6EFDF;border-radius:18px;padding:28px}
+.box h3{color:#F6EFDF}
+
+footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px;font-size:.9rem}
+
+@media (max-width:760px){
+  .hero .wrap,.storia,.contatti{grid-template-columns:1fr}
+  .hero{padding:44px 0 56px}
+  nav ul{gap:14px;flex-wrap:wrap}
+  section{padding:52px 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="demo">Sito dimostrativo: ristorante, indirizzo, telefono e prezzi sono inventati.</div>
+
+<!-- ====== 2) NOME: cambia "Osteria del Borgo" qui, nel titolo, nel footer e nel messaggio WhatsApp ====== -->
+<header>
+  <div class="nav">
+<a class="logo" href="#top">Osteria del Borgo 🍽️</a>    <nav aria-label="Navigazione principale">
+      <ul>
+        <li><a href="#menu">Il menu</a></li>
+        <li><a href="#storia">La nostra storia</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>La tradizione italiana, in ogni piatto</h1>
+        <p>Paste fatte a mano, ricette di famiglia e ingredienti di stagione, in una sala piccola e accogliente.</p>
+        <a class="btn" href="#menu">Esplora il nostro menu →</a>
+      </div>
+      <!-- Illustrazione: piatto di pasta -->
+      <svg viewBox="0 0 300 300" role="img" aria-label="Illustrazione di un piatto di pasta al pomodoro">
+        <circle cx="150" cy="150" r="140" fill="#F6EFDF"/>
+        <circle cx="150" cy="150" r="112" fill="#EBE0C8"/>
+        <g fill="none" stroke="#D9A441" stroke-width="9" stroke-linecap="round">
+          <path d="M80 140c30-40 110-40 140 0"/><path d="M90 165c30-34 90-34 120 0"/><path d="M105 188c25-24 65-24 90 0"/><path d="M75 160c10 30 40 50 75 50s65-20 75-50"/>
+        </g>
+        <path d="M95 150c20-22 90-22 110 0-10 26-30 40-55 40s-45-14-55-40z" fill="#B5532F" opacity=".92"/>
+        <g fill="#25402F"><ellipse cx="135" cy="140" rx="9" ry="5" transform="rotate(-25 135 140)"/><ellipse cx="165" cy="150" rx="9" ry="5" transform="rotate(20 165 150)"/><ellipse cx="148" cy="165" rx="8" ry="4.5"/></g>
+        <circle cx="170" cy="128" r="6" fill="#F6EFDF"/><circle cx="128" cy="160" r="5" fill="#F6EFDF"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ====== Piatti principali ====== -->
+  <section id="menu" class="alt">
+    <div class="wrap">
+      <h2>I nostri piatti principali</h2>
+      <p class="intro">Il menu cambia con le stagioni. Questi sono i piatti che tornano sempre in tavola.</p>
+      <div class="piatti">
+        <article class="piatto">
+          <svg viewBox="0 0 300 170" role="img" aria-label="Illustrazione tagliatelle al ragù"><rect width="300" height="170" fill="#E4D3B0"/><circle cx="150" cy="85" r="68" fill="#F6EFDF"/><g fill="none" stroke="#D9A441" stroke-width="8" stroke-linecap="round"><path d="M105 80c25-25 65-25 90 0"/><path d="M110 98c22-20 58-20 80 0"/><path d="M120 115c18-14 42-14 60 0"/></g><circle cx="150" cy="88" r="22" fill="#8C3B22"/></svg>
+          <div><h3>Tagliatelle al ragù</h3><p>Pasta all'uovo tirata a mano con ragù cotto lentamente per quattro ore.</p><span class="prezzo">€ 14 · prezzo demo</span></div>
+        </article>
+        <article class="piatto">
+          <svg viewBox="0 0 300 170" role="img" aria-label="Illustrazione di una pizza margherita"><rect width="300" height="170" fill="#D9C7A0"/><circle cx="150" cy="85" r="70" fill="#E3B567"/><circle cx="150" cy="85" r="58" fill="#B5532F"/><g fill="#F6EFDF"><circle cx="125" cy="70" r="12"/><circle cx="168" cy="95" r="14"/><circle cx="150" cy="60" r="8"/><circle cx="130" cy="108" r="9"/></g><g fill="#25402F"><ellipse cx="160" cy="70" rx="6" ry="3"/><ellipse cx="138" cy="92" rx="6" ry="3"/></g></svg>
+          <div><h3>Margherita nel forno a legna</h3><p>Impasto a lunga lievitazione, pomodoro, fior di latte e basilico fresco.</p><span class="prezzo">€ 9 · prezzo demo</span></div>
+        </article>
+        <article class="piatto">
+          <svg viewBox="0 0 300 170" role="img" aria-label="Illustrazione di una porzione di tiramisù"><rect width="300" height="170" fill="#E4D3B0"/><circle cx="150" cy="90" r="68" fill="#F6EFDF"/><rect x="105" y="62" width="90" height="56" rx="6" fill="#C9A06A"/><rect x="105" y="62" width="90" height="14" rx="6" fill="#4A2E20"/><rect x="105" y="86" width="90" height="8" fill="#F6EFDF"/></svg>
+          <div><h3>Tiramisù della casa</h3><p>Savoiardi, caffè, mascarpone e cacao amaro. Fatto ogni mattina.</p><span class="prezzo">€ 6 · prezzo demo</span></div>
+        </article>
+        <article class="piatto">
+          <svg viewBox="0 0 300 170" role="img" aria-label="Illustrazione di una parmigiana di melanzane"><rect width="300" height="170" fill="#D9C7A0"/><circle cx="150" cy="85" r="68" fill="#F6EFDF"/><rect x="104" y="58" width="92" height="54" rx="8" fill="#4A2E3A"/><rect x="104" y="70" width="92" height="8" fill="#B5532F"/><rect x="104" y="88" width="92" height="8" fill="#F6EFDF"/><rect x="104" y="58" width="92" height="12" rx="6" fill="#B5532F"/><ellipse cx="140" cy="62" rx="7" ry="3" fill="#25402F"/><ellipse cx="165" cy="64" rx="7" ry="3" fill="#25402F"/></svg>
+          <div><h3>Parmigiana di melanzane</h3><p>Piatto vegetariano: melanzane al forno, pomodoro, basilico e parmigiano.</p><span class="prezzo">€ 11 · prezzo demo</span></div>
+        </article>
+      </div>
+      <p class="nota">Le immagini sono illustrazioni segnaposto: puoi sostituirle con fotografie vere (vedi la guida).</p>
+    </div>
+  </section>
+
+  <!-- ====== La nostra storia ====== -->
+  <section id="storia">
+    <div class="wrap storia">
+      <div>
+        <h2>La nostra storia</h2>
+        <p>L'Osteria del Borgo nasce in una vecchia stalla ristrutturata, dove la famiglia Bianchi (nome inventato) ha aperto le porte a vicini e viaggiatori.</p>
+        <p>Da allora la regola è semplice: poche cose, fatte bene, con prodotti di produttori vicini. La sfoglia si tira ogni giorno, il pane è del forno accanto.</p>
+        <blockquote>«A tavola non si ha mai fretta.»</blockquote>
+      </div>
+      <svg viewBox="0 0 300 260" role="img" aria-label="Illustrazione di una casa di borgo con un albero">
+        <rect width="300" height="260" rx="22" fill="#EBE0C8"/>
+        <rect x="70" y="110" width="150" height="110" fill="#F6EFDF"/>
+        <path d="M60 112l85-60 85 60z" fill="#B5532F"/>
+        <rect x="132" y="156" width="30" height="64" rx="4" fill="#25402F"/>
+        <rect x="85" y="130" width="28" height="28" fill="#D9A441"/><rect x="180" y="130" width="28" height="28" fill="#D9A441"/>
+        <rect x="244" y="150" width="8" height="70" fill="#6B4A32"/><circle cx="248" cy="136" r="30" fill="#25402F"/>
+        <rect x="0" y="220" width="300" height="40" fill="#25402F" opacity=".85"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ====== Contatti ====== -->
+  <section id="contatti" class="alt">
+    <div class="wrap">
+      <h2>Contatti e orari</h2>
+      <div class="contatti">
+        <div>
+          <dl>
+            <dt>Indirizzo (fittizio)</dt><dd>Via del Borgo 12, 00000 Borgo Antico</dd>
+            <dt>Telefono (fittizio)</dt><dd>+39 000 000 0000</dd>
+          </dl>
+          <h3 style="margin-top:28px;color:var(--verde)">Orari</h3>
+          <table>
+            <tr><td>Martedì – Venerdì</td><td>12:00–15:00 · 19:00–23:00</td></tr>
+            <tr><td>Sabato – Domenica</td><td>12:00–23:30</td></tr>
+            <tr><td>Lunedì</td><td>Chiuso</td></tr>
+          </table>
+        </div>
+        <div class="box">
+          <h3>Vuoi sapere qualcosa?</h3>
+          <p>Scrivici su WhatsApp per chiedere informazioni su menu, allergeni o eventi. Questo pulsante apre solo una chat: il sito non gestisce prenotazioni.</p>
+          <!-- Sostituisci 390000000000 con un numero vero (prefisso 39 + numero, senza spazi né +) -->
+          <a class="btn wa" href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20avere%20informazioni%20sull%27Osteria%20del%20Borgo." target="_blank" rel="noopener">Chiedi informazioni su WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© Osteria del Borgo · Sito dimostrativo con dati inventati · Nessuna prenotazione o pagamento online</footer>
+<button id="saluto">Clicca qui per un saluto</button>
+<script>
+  document.getElementById("saluto").addEventListener("click", function() {
+    document.getElementById("saluto").textContent = "Grazie per averci visitato!";
+  });
+</script>
+</body>
+</html>
