@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Osteria del Borgo</title>
+<script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -42,6 +43,18 @@ header{position:sticky;top:0;z-index:10;background:var(--verde);color:#F6EFDF}
 nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0}
 nav a{text-decoration:none;font-weight:500;font-size:.95rem;padding:4px 0;border-bottom:2px solid transparent}
 nav a:hover{border-color:var(--terracotta)}
+
+/* Pulsante hamburger: nascosto su desktop, visibile solo su telefono (vedi sotto) */
+.menu-btn{display:none;width:48px;height:48px;align-items:center;justify-content:center;background:transparent;color:inherit;border:1px solid rgba(246,239,223,.35);border-radius:12px;cursor:pointer;padding:0}
+.menu-btn .linee,.menu-btn .linee::before,.menu-btn .linee::after{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;transition:transform .2s,background .2s}
+.menu-btn .linee{position:relative}
+.menu-btn .linee::before,.menu-btn .linee::after{content:"";position:absolute;left:0}
+.menu-btn .linee::before{top:-7px}
+.menu-btn .linee::after{top:7px}
+.menu-btn[aria-expanded="true"] .linee{background:transparent}
+.menu-btn[aria-expanded="true"] .linee::before{transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] .linee::after{transform:translateY(-7px) rotate(-45deg)}
+@media (prefers-reduced-motion:reduce){.menu-btn .linee,.menu-btn .linee::before,.menu-btn .linee::after{transition:none}}
 
 /* ====== Sezione iniziale ====== */
 .hero{background:var(--verde);color:#F6EFDF;padding:64px 0 80px}
@@ -103,6 +116,18 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
   .hero .wrap,.storia,.contatti{grid-template-columns:1fr}
   .hero{padding:44px 0 56px}
   nav ul{gap:14px;flex-wrap:wrap}
+  /* Testata compatta e menu a tendina (solo telefono) */
+  html{scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+  header{top:env(safe-area-inset-top,0px)}
+  .nav{padding:6px 16px}
+  .logo{font-size:1.2rem}
+  .js .nav{flex-wrap:nowrap}
+  .js .menu-btn{display:flex}
+  .js nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--verde);border-top:1px solid rgba(246,239,223,.2);box-shadow:0 14px 24px rgba(0,0,0,.28)}
+  .js nav.aperto{display:block}
+  .js nav ul{flex-direction:column;flex-wrap:nowrap;gap:0;padding:6px 0 10px}
+  .js nav a{display:block;padding:14px 22px;font-size:1.05rem;border-bottom:0}
+  .js nav a:hover{background:rgba(246,239,223,.1)}
   section{padding:52px 0}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
@@ -116,7 +141,8 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
 <header>
   <div class="nav">
     <a class="logo" href="#top">Osteria del Borgo</a>
-    <nav aria-label="Navigazione principale">
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Menu di navigazione" aria-controls="menu-principale" aria-expanded="false"><span class="linee" aria-hidden="true"></span></button>
+    <nav id="menu-principale" aria-label="Navigazione principale">
       <ul>
         <li><a href="#menu">Il menu</a></li>
         <li><a href="#storia">La nostra storia</a></li>
@@ -254,5 +280,27 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
 </main>
 
 <footer>© Osteria del Borgo · Sito dimostrativo con dati inventati · Nessuna prenotazione o pagamento online</footer>
+<script>
+/* Menu hamburger: apre/chiude, si chiude con la scelta di una voce, con Esc o toccando fuori */
+(function(){
+  var btn=document.getElementById('menu-btn');
+  var menu=document.getElementById('menu-principale');
+  var testata=document.querySelector('header');
+  if(!btn||!menu||!testata)return;
+  function imposta(aperto){
+    btn.setAttribute('aria-expanded',aperto?'true':'false');
+    menu.classList.toggle('aperto',aperto);
+  }
+  function eAperto(){return btn.getAttribute('aria-expanded')==='true';}
+  btn.addEventListener('click',function(){imposta(!eAperto());});
+  testata.addEventListener('click',function(e){if(e.target.closest('a'))imposta(false);});
+  document.addEventListener('click',function(e){if(!e.target.closest('header'))imposta(false);});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&eAperto()){imposta(false);btn.focus();}
+  });
+  var mq=window.matchMedia('(max-width:760px)');
+  if(mq.addEventListener){mq.addEventListener('change',function(){imposta(false);});}
+})();
+</script>
 </body>
 </html>
