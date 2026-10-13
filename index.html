@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Osteria del Borgo | Ristorante Italiano</title>
+<title>Osteria del Borgo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ====== 1) COLORI: cambia qui i colori di tutto il sito ====== */
 :root{
-  --crema:#E8F0E8;        /* sfondo */
+  --crema:#F6EFDF;        /* sfondo */
   --crema-scuro:#EBE0C8;  /* sezioni alternate */
   --verde:#162B20;        /* verde bosco scuro */
   --terracotta:#B5532F;   /* dettagli e pulsanti */
@@ -26,7 +26,8 @@
 :root[data-theme="dark"]{--crema:#1F2620;--crema-scuro:#27312A;--testo:#EDE6D3;--verde:#2F5240;--terracotta:#D0673F}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{margin:0;background:#F2F2F2;color:var(--testo);font-family:var(--font-testo);line-height:1.65;font-size:18px}h1,h2,h3{font-family:var(--font-titoli);font-weight:600;line-height:1.15;margin:0 0 .5em}
+body{margin:0;background:var(--crema);color:var(--testo);font-family:var(--font-testo);line-height:1.65;font-size:17px}
+h1,h2,h3{font-family:var(--font-titoli);font-weight:600;line-height:1.15;margin:0 0 .5em}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
 .wrap{max-width:1050px;margin:0 auto;padding:0 22px}
@@ -45,10 +46,10 @@ nav a:hover{border-color:var(--terracotta)}
 /* ====== Sezione iniziale ====== */
 .hero{background:var(--verde);color:#F6EFDF;padding:64px 0 80px}
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-.hero h1{font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-.01em}
+.hero h1{font-size:clamp(2.4rem,6vw,4.1rem);letter-spacing:-.01em}
 .hero p{font-size:1.15rem;max-width:34ch;opacity:.92;margin:0 0 28px}
-.btn{display:inline-block;background:var(--terracotta);color:#fff;text-decoration:none;font-weight:600;padding:20px 36px;border-radius:8px;border:0;cursor:pointer;font-size:1rem;transition:transform .3s}
-.btn:hover{transform:translateY(-6px);box-shadow:0 8px 20px rgba(0,0,0,0.2)}
+.btn{display:inline-block;background:var(--terracotta);color:#fff;text-decoration:none;font-weight:600;padding:14px 28px;border-radius:999px;border:0;cursor:pointer;font-size:1rem;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
 .btn.wa{background:#1f7a4d}
 .hero .btn{font-size:1.15rem;padding:17px 38px;box-shadow:0 0 0 4px rgba(246,239,223,.35),0 10px 24px rgba(0,0,0,.35)}
 .hero .btn:hover{box-shadow:0 0 0 6px rgba(246,239,223,.5),0 12px 28px rgba(0,0,0,.4)}
@@ -84,6 +85,18 @@ td:last-child{text-align:right}
 .box{background:var(--verde);color:#F6EFDF;border-radius:18px;padding:28px}
 .box h3{color:#F6EFDF}
 
+/* ====== Recensioni ====== */
+section.recensioni{background:var(--verde);color:#F6EFDF}
+.recensioni h2{color:#F6EFDF}
+.recensioni .intro{opacity:.9}
+.recensioni-griglia{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.recensione{background:var(--crema);color:var(--testo);border-radius:18px;padding:26px 24px;margin:0;display:flex;flex-direction:column;gap:12px;border-top:5px solid var(--terracotta)}
+.stelle{color:#C98A1B;font-size:1.25rem;letter-spacing:3px}
+.recensione blockquote{margin:0;font-family:var(--font-titoli);font-size:1.08rem;line-height:1.5}
+.recensione figcaption{margin-top:auto;font-size:.92rem}
+.recensione figcaption strong{display:block}
+.badge{display:inline-block;align-self:flex-start;background:var(--crema-scuro);color:var(--terracotta);font-size:.76rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:3px 10px;border-radius:999px}
+
 footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px;font-size:.9rem}
 
 @media (max-width:760px){
@@ -102,10 +115,12 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
 <!-- ====== 2) NOME: cambia "Osteria del Borgo" qui, nel titolo, nel footer e nel messaggio WhatsApp ====== -->
 <header>
   <div class="nav">
-<a class="logo" href="#top">Osteria del Borgo 🍽️</a>    <nav aria-label="Navigazione principale">
+    <a class="logo" href="#top">Osteria del Borgo</a>
+    <nav aria-label="Navigazione principale">
       <ul>
         <li><a href="#menu">Il menu</a></li>
         <li><a href="#storia">La nostra storia</a></li>
+        <li><a href="#recensioni">Recensioni</a></li>
         <li><a href="#contatti">Contatti</a></li>
       </ul>
     </nav>
@@ -116,9 +131,9 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
   <div class="hero">
     <div class="wrap">
       <div>
-        <h1>La tradizione italiana, in ogni piatto</h1>
+        <h1>Cucina di casa, come una volta</h1>
         <p>Paste fatte a mano, ricette di famiglia e ingredienti di stagione, in una sala piccola e accogliente.</p>
-        <a class="btn" href="#menu">Esplora il nostro menu →</a>
+        <a class="btn" href="#menu">Scopri il menu</a>
       </div>
       <!-- Illustrazione: piatto di pasta -->
       <svg viewBox="0 0 300 300" role="img" aria-label="Illustrazione di un piatto di pasta al pomodoro">
@@ -182,6 +197,34 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
     </div>
   </section>
 
+  <!-- ====== Recensioni dei clienti (esempi dimostrativi) ====== -->
+  <section id="recensioni" class="recensioni">
+    <div class="wrap">
+      <h2>Le recensioni dei clienti</h2>
+      <p class="intro">Tre recensioni di esempio, scritte per questo sito dimostrativo: non provengono da clienti reali.</p>
+      <div class="recensioni-griglia">
+        <figure class="recensione">
+          <span class="badge">Recensione dimostrativa</span>
+          <div class="stelle" role="img" aria-label="5 stelle su 5">★★★★★</div>
+          <blockquote>Le tagliatelle sembravano quelle della nonna. Servizio gentile e atmosfera da casa.</blockquote>
+          <figcaption><strong>Giulia R.</strong>Cliente fittizia</figcaption>
+        </figure>
+        <figure class="recensione">
+          <span class="badge">Recensione dimostrativa</span>
+          <div class="stelle" role="img" aria-label="5 stelle su 5">★★★★★</div>
+          <blockquote>Pizza leggerissima e una bella scelta di piatti vegetariani. Torneremo con tutta la famiglia.</blockquote>
+          <figcaption><strong>Marco e Elena</strong>Clienti fittizi</figcaption>
+        </figure>
+        <figure class="recensione">
+          <span class="badge">Recensione dimostrativa</span>
+          <div class="stelle" role="img" aria-label="4 stelle su 5">★★★★☆</div>
+          <blockquote>Tiramisù ottimo e ambiente curato. Nel fine settimana conviene arrivare presto.</blockquote>
+          <figcaption><strong>Paolo S.</strong>Cliente fittizio</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- ====== Contatti ====== -->
   <section id="contatti" class="alt">
     <div class="wrap">
@@ -211,11 +254,5 @@ footer{background:var(--verde);color:#F6EFDF;text-align:center;padding:26px 22px
 </main>
 
 <footer>© Osteria del Borgo · Sito dimostrativo con dati inventati · Nessuna prenotazione o pagamento online</footer>
-<button id="saluto">Clicca qui per un saluto</button>
-<script>
-  document.getElementById("saluto").addEventListener("click", function() {
-    document.getElementById("saluto").textContent = "Grazie per averci visitato!";
-  });
-</script>
 </body>
 </html>
